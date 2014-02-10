@@ -1,6 +1,6 @@
 # CBOR-Qt
 
-CBOR-Qt should supports everything in RFC 7049 except for 16-bit floats and indefinite length arrays and maps. Values are typically encoded in the smallest number of bytes. However there are some exceptions, namely: Floating point values are never converted to integers even if this would result in a shorter encoding. Likewise integers are never converted to floating point. Indefinite length encoding is never used. 16-bit floating point values are never used.
+CBOR-Qt should supports everything in RFC 7049 except for 16-bit floats and indefinite length encoding. Values are typically encoded in the smallest number of bytes. There are however some exceptions to this rule, namely: Floating point values are never converted to integers even if this would result in a shorter encoding. Likewise integers are never converted to floating point. Indefinite length encoding is never used. 16-bit floating point values are never used.
 
 ### Example
 

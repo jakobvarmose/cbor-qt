@@ -1,6 +1,22 @@
 // Copyright 2014 Jakob Varmose Bentzen | Released under the MIT License
 #include "Cbor.h"
 #include <stdexcept>
+CborList::CborList () : QList <Cbor> () {
+}
+CborList::CborList (const QList<Cbor> &other) : QList <Cbor> (other) {
+}
+CborList CborList::append (const Cbor &item) {
+	QList <Cbor>::append (item);
+	return *this;
+}
+CborMap::CborMap () : QMap <Cbor, Cbor> () {
+}
+CborMap::CborMap (const QMap<Cbor, Cbor> &other) : QMap <Cbor, Cbor> (other) {
+}
+CborMap CborMap::insert (const Cbor &key, const Cbor &value) {
+	QMap <Cbor, Cbor>::insert (key, value);
+	return *this;
+}
 Cbor::Cbor (unsigned int val) {
 	this->m_type = UNSIGNED;
 	this->m_value = val;

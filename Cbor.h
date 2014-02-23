@@ -5,8 +5,18 @@
 #include <QString>
 #include <QDateTime>
 class Cbor;
-typedef QList<Cbor> CborList;
-typedef QMap<Cbor,Cbor> CborMap;
+class CborList : public QList <Cbor> {
+public:
+	CborList ();
+	CborList (const QList <Cbor> &other);
+	CborList append (const Cbor &item);
+};
+class CborMap : public QMap <Cbor, Cbor> {
+public:
+	CborMap ();
+	CborMap (const QMap <Cbor, Cbor> &other);
+	CborMap insert (const Cbor &key, const Cbor &value);
+};
 typedef quint64 CborTag;
 typedef QList<CborTag> CborTagList;
 class Cbor {

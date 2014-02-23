@@ -27,13 +27,21 @@ Not supported:
 ### Example
 
 ```c++
-CborMap map;
-map.insert ("foo", "bar");
-CborList list;
-list.append (-2);
-list.append (false);
-list.append (Cbor::Simple (100));
-map.insert ("baz", list);
-QByteArray data = Cbor (map).save ();
-qDebug () << data.toHex ();
+// Encoding
+Cbor test = CborMap ()
+    .insert ("foo", "bar")
+    .insert ("baz", CborList ()
+        .append (-2)
+        .append (true)
+        .append (Cbor::Simple (100))
+    )
+;
+qDebug () << test.save ().toHex ();
+
+// Decoding
+qDebug () << test.toMap ().value ("foo").toString ();
+foreach (Cbor item, test.toMap ().value ("baz").toList ()) {
+	qDebug () << item.toInt () << item.toBool () << item.toSimple ();
+}
 ```
+

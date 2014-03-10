@@ -390,6 +390,7 @@ bool Cbor::readVar (const QByteArray &input, quint64 &pos, int &major, int &mino
 	return true;
 }
 bool Cbor::read (const QByteArray &input, quint64 &pos) {
+	*this = Cbor ();
 	int major, minor;
 	quint64 pos2 = pos;
 	quint64 size;

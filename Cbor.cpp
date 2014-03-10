@@ -56,12 +56,7 @@ Cbor::Cbor (const QString &value) {
 	this->m_string = value;
 }
 Cbor::Cbor (CborTag tag, const Cbor &other) {
-	this->m_type = other.m_type;
-	this->m_value = other.m_value;
-	this->m_string = other.m_string;
-	this->m_list = other.m_list;
-	this->m_map = other.m_map;
-	this->m_tags = other.m_tags;
+	*this = other;
 	this->m_tags.push_front (tag);
 }
 Cbor::Cbor (bool value) {

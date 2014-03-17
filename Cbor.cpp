@@ -412,7 +412,7 @@ bool Cbor::read (const QByteArray &input, quint64 &pos) {
 		return true;
 	case 2:
 		this->m_type = (Cbor::Type)major;
-		if (size > (quint64)input.size () && pos2 + size > (quint64)input.size ()) {
+		if (size > (quint64)input.size () || pos2 + size > (quint64)input.size ()) {
 			return false;
 		}
 		this->m_blob = input.mid (pos2, size);
@@ -420,7 +420,7 @@ bool Cbor::read (const QByteArray &input, quint64 &pos) {
 		return true;
 	case 3:
 		this->m_type = (Cbor::Type)major;
-		if (size > (quint64)input.size () && pos + size > (quint64)input.size ()) {
+		if (size > (quint64)input.size () || pos2 + size > (quint64)input.size ()) {
 			return false;
 		}
 		this->m_string = QString::fromUtf8 (input.mid (pos2, size));

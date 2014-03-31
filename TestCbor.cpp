@@ -87,5 +87,54 @@ void TestCbor::decodeInvalid () {
 	QCOMPARE (Cbor ().load (QByteArray::fromHex ("81")), false);
 	QCOMPARE (Cbor ().load (QByteArray::fromHex ("b1")), false);
 }
+void TestCbor::debug () {
+	// Positive ints
+	QCOMPARE (Cbor (1).toDebugString (), QString ("1"));
+	
+	// Negative ints
+	QEXPECT_FAIL ("", "Not implemented correctly", Continue);
+	QCOMPARE (Cbor (-1).toDebugString (), QString ("-1"));
+	
+	// Byte strings
+	QCOMPARE (Cbor (QByteArray::fromHex ("010203")).toDebugString (), QString ("h'010203'"));
+	
+	// Text strings
+	QCOMPARE (Cbor ("abc").toDebugString (), QString ("\"abc\""));
+	
+	// Arrays
+	CborList list;
+	QCOMPARE (Cbor (list).toDebugString (), QString ("[]"));
+	list.append (1);
+	QCOMPARE (Cbor (list).toDebugString (), QString ("[1]"));
+	list.append (2);
+	QCOMPARE (Cbor (list).toDebugString (), QString ("[1, 2]"));
+	
+	// Maps
+	CborMap map;
+	QCOMPARE (Cbor (map).toDebugString (), QString ("{}"));
+	map.insert ("a", "b");
+	QCOMPARE (Cbor (map).toDebugString (), QString ("{\"a\": \"b\"}"));
+	map.insert ("c", "d");
+	QCOMPARE (Cbor (map).toDebugString (), QString ("{\"a\": \"b\", \"c\": \"d\"}"));
+	
+	// Tags
+	QEXPECT_FAIL ("", "Not implemented", Continue);
+	QCOMPARE (Cbor (55799, Cbor ()).toDebugString (), QString ("55799(undefined)"));
+	
+	// Simple values
+	QCOMPARE (Cbor (false).toDebugString (), QString ("false"));
+	QCOMPARE (Cbor (true).toDebugString (), QString ("true"));
+	QCOMPARE (Cbor (Cbor::Null).toDebugString (), QString ("null"));
+	QCOMPARE (Cbor ().toDebugString (), QString ("undefined"));
+	
+	// Floats
+	QCOMPARE (Cbor (1.2).toDebugString (), QString ("1.2"));
+	QEXPECT_FAIL ("", "Not implemented", Continue);
+	QCOMPARE (Cbor (INFINITY).toDebugString (), QString ("Infinity"));
+	QEXPECT_FAIL ("", "Not implemented", Continue);
+	QCOMPARE (Cbor (-INFINITY).toDebugString (), QString ("-Infinity"));
+	QEXPECT_FAIL ("", "Not implemented", Continue);
+	QCOMPARE (Cbor (NAN).toDebugString (), QString ("NaN"));
+}
 
 QTEST_MAIN (TestCbor)

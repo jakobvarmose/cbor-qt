@@ -33,4 +33,6 @@ private slots:
 	void decodeFloats ();
 	
 	void decodeInvalid ();
+	
+	void debug ();
 };

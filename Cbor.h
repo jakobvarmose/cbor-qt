@@ -18,6 +18,24 @@ public:
 	CborMap insert (const Cbor &key, const Cbor &value);
 };
 typedef quint64 CborTag;
+enum CborTagValues {
+	ISODate = 0,
+	UnixTime,
+	PositiveBigInteger,
+	NegativeBigInteger,
+	BigDecimal,
+	BigFloat,
+	ToBase64Url = 21,
+	ToBase64,
+	ToHex,
+	EmbeddedCbor,
+	URI = 32,
+	Base64Url,
+	Base64,
+	RegularExpression,
+	MimeMessage,
+	CborHeader = 55799
+};
 typedef QList<CborTag> CborTagList;
 class Cbor {
 public:

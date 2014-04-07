@@ -122,6 +122,7 @@ void TestCbor::debug () {
 	QCOMPARE (Cbor (55799, Cbor ()).toDebugString (), QString ("55799(undefined)"));
 	
 	// Simple values
+	QCOMPARE (Cbor (Cbor::Simple (0)).toDebugString (), QString ("simple(0)"));
 	QCOMPARE (Cbor (false).toDebugString (), QString ("false"));
 	QCOMPARE (Cbor (true).toDebugString (), QString ("true"));
 	QCOMPARE (Cbor (Cbor::Null).toDebugString (), QString ("null"));

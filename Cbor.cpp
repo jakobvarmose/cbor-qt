@@ -277,8 +277,9 @@ void Cbor::write (QByteArray &result) const {
 		break;
 	}
 	case TEXT: {
-		writeVar (result, this->m_type, this->m_string.size ());
-		result.append (this->m_string.toUtf8 ());
+		QString text = this->m_string.toUtf8 ();
+		writeVar (result, this->m_type, text.size ());
+		result.append (text);
 		break;
 	}
 	case ARRAY:

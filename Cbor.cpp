@@ -481,32 +481,9 @@ bool Cbor::read (const QByteArray &input, quint64 &pos) {
 	return false;//Never reached
 }
 bool Cbor::operator < (const Cbor &other) const {
-	//TODO compare tags
-	if (this->m_type < other.m_type) {
-		return true;
-	} else if (this->m_type > other.m_type) {
-		return false;
-	} else {
-		switch (this->m_type) {
-		case UNSIGNED:
-		case NEGATIVE:
-			return this->m_value < other.m_value;
-		case TEXT: {
-			QByteArray first = this->m_string.toUtf8 ();
-			QByteArray second = other.m_string.toUtf8 ();
-			if (first.size () < second.size ()) {
-				return true;
-			} else if (first.size () > second.size ()) {
-				return false;
-			} else {
-				return first < second;
-			}
-		}
-		default:
-			//TODO handle other cases
-			return false;
-		}
-	}
+	QByteArray first = this->save ();
+	QByteArray second = other.save ();
+	return first < second;
 }
 bool Cbor::operator == (const Cbor &other) const {
 	if (this->m_tags != other.m_tags) {

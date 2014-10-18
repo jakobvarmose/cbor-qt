@@ -51,6 +51,7 @@ void TestCbor::decodeMaps () {
 	QCOMPARE (cborLoad (QByteArray::fromHex ("a0")), Cbor (CborMap ()));
 	QEXPECT_FAIL ("", "Indefinite length maps not supported", Continue);
 	QCOMPARE (cborLoad (QByteArray::fromHex ("bfff")), Cbor (CborMap ()));
+	QCOMPARE (cborLoad (QByteArray::fromHex ("a2410101410202")).toMap ().size (), 2);
 }
 void TestCbor::encodeTags () {
 	QCOMPARE (Cbor (55799, Cbor ()).save (), QByteArray::fromHex ("d9d9f7f7"));
